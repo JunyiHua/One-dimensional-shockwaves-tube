@@ -61,7 +61,7 @@ $$
 
 特征线法是求解非定常连续流动问题的重要方法，参考数学物理方程的行波法。
 
-对于一个一阶偏微分方程$\frac{\partial\rho}{\partial t}+c^2\frac{\partial \rho}{\partial x}=0$，即一维的对流（质量守恒）方程，为了将其转为双曲型的二阶波动方程以方便使用行波法的达朗贝尔公式，故将$\rho$表示为势函数的偏导数$\frac{\partial\psi}{\partial x}$，此时可以将$\rho$理解为速度。方程被化为
+对于一个一阶偏微分方程$\frac{\partial\rho}{\partial t}+c^2\frac{\partial \rho}{\partial x}=0$，即一维的对流（质量守恒）方程，其初值问题即一阶的柯西问题。为了将其转为双曲型的二阶波动方程以方便使用行波法的达朗贝尔公式，故将$\rho$表示为势函数的偏导数$\frac{\partial\psi}{\partial x}$，此时可以将$\rho$理解为速度。方程被化为
 $$
 \frac{\partial^2\psi}{\partial t^2}=c_0^2\frac{\partial^2\psi}{\partial x^2}
 $$
@@ -94,6 +94,8 @@ $$
 ### 欧拉方程的积分形式
 
 ### 欧拉方程组的特征方程
+
+#### 特征方程的推导
 
 理想流体一维绝热运动的原始方程组欧拉形式为
 $$
@@ -137,7 +139,99 @@ $$
 
 至于第三个能量守恒式，很显然就能得到其特征线$\frac{dx}{dt}=u$和特征关系$\frac{dS}{dt}=0$，即等熵绝热。
 
-将三族特征线分别记为$C_{+},C_{-},C_0$。沿着特征线$C_{\pm}$，表示一组物理量的组合是常量，其本质是牛顿第三定律；而沿着特征线$C_0$，熵值不变，但是不同的$C_0$上熵值可能不同。对于均熵的绝热流动或者等熵流动，等熵条件在各处满足，此时这一族特征线也就没有了考虑的必要。
+将三族特征线分别记为$C_{+},C_{-},C_0$。沿着特征线$C_{\pm}$，表示一组物理量的组合是常量，其本质是牛顿第三定律；而沿着特征线$C_0$，熵值不变，但是不同的$C_0$上熵值可能不同。对于均熵的绝热流动或者等熵流动，等熵条件在各处满足，此时这一族特征线也就没有了考虑的必要，即均熵条件下考虑两族特征线，非均熵条件下考虑三族特征线。
+
+> 特征线的另外一个定义是：对于双曲型方程组，在$(x,t)$平面上有这样一组曲线，在这些曲线上，给定任意物理参数的值作为柯西问题的初始值（柯西问题的初始值是一阶微商），这样柯西问题的解一般是不存在的，这些曲线就称为方程组的特征曲线。
+>
+> 现在考虑另外一个思路，通过构造线性方程组去解欧拉方程组
+> $$
+> \left\{
+> \begin{array}{rcl}
+> \frac{\partial\rho}{\partial t}+u\frac{\partial\rho}{\partial x}+\rho\frac{\partial u}{\partial x}=0\\
+> \frac{\partial u}{\partial t}+u\frac{\partial u}{\partial x}+\frac{1}{\rho}\frac{\partial p}{\partial x}=0\\
+> \frac{\partial S}{\partial t}+u\frac{\partial S}{\partial x}=0
+> \end{array}
+> \right.
+> $$
+> 设特征曲线$x=x(t)$，要在特征线上求出各个物理量的一级微商的解，做如下操作。
+>
+> 引入热力学状态函数$p=f(\rho,S)$，将状态量$p$用$\rho,S$替代表示，有$\frac{\partial p}{\partial x}=\frac{\partial p}{\partial\rho}\frac{\partial\rho}{\partial x}+\frac{\partial p}{\partial S}\frac{\partial S}{\partial x}$。
+>
+> 再引入以下一组全微分
+> $$
+> \left\{
+> \begin{array}{rcl}
+> d\rho=\frac{\partial \rho}{\partial t}dt+\frac{\partial \rho}{\partial x}dx\\
+> du=\frac{\partial u}{\partial t}dt+\frac{\partial u}{\partial x}dx\\
+> dS=\frac{\partial S}{\partial t}dt+\frac{\partial S}{\partial x}dx
+> \end{array}
+> \right.
+> $$
+> 将以上关系式相互代入、联立得到线性方程组
+> $$
+> \left(\begin{array}{cc}
+> 1 & 0 & 0 & u & \rho & 0\\
+> 0 & \rho & 0 & p_{\rho} & \rho u & p_S\\
+> 0 & 0 & 1 & 0 & 0 & u\\
+> dt & 0 & 0 & dx & 0 & 0\\
+> 0 & dt & 0 & 0 & dx & 0\\
+> 0 & 0 & dt & 0 & 0 & dx
+> \end{array}\right)
+> \left(\begin{array}{c}
+> \frac{\partial \rho}{\partial t}\\
+> \frac{\partial u}{\partial t}\\
+> \frac{\partial \rho}{\partial x}\\
+> \frac{\partial u}{\partial x}\\
+> \frac{\partial S}{\partial t}\\
+> \frac{\partial S}{\partial x}\\
+> \end{array}\right)
+> =
+> \left(\begin{array}{c}
+> 0\\
+> 0\\
+> 0\\
+> d\rho\\
+> du\\
+> dS\\
+> \end{array}\right)
+> $$
+> 因为是在特征曲线上，一级微商不存在（特征曲线上有弱间断，即一级微商间断不连续，具体见后文间断部分），所以以上线性方程组无解，系数矩阵的行列式为零。
+> $$
+> \left|\begin{array}{cc}
+> 1 & 0 & 0 & u & \rho & 0\\
+> 0 & \rho & 0 & p_{\rho} & \rho u & p_S\\
+> 0 & 0 & 1 & 0 & 0 & u\\
+> dt & 0 & 0 & dx & 0 & 0\\
+> 0 & dt & 0 & 0 & dx & 0\\
+> 0 & 0 & dt & 0 & 0 & dx
+> \end{array}\right|
+> =0
+> $$
+> 即$\rho(udt-dx)^3-\rho p_\rho(udt-dx)dt^2=0$，其中$p_\rho=c^2$，故可以得到特征线族
+> $$
+> \frac{dx}{dt}=u,u+c,u-c
+> $$
+> 在特征关系下，原方程组有解（我的理解是，特征线上物理量的一阶微商无解，但是其组合也就是特征关系本身有解，这也就解释了所谓的特征曲线上物理参数之间一定满足相应的特征关系，而所谓的解也就是特征关系等式右侧的那个常数），运用克莱默法则，将等式右侧的矩阵分别带入系数矩阵的第五、六列，令其为零，即得到特征关系式
+> $$
+> \frac{dx}{dt}=u:dS=0\\
+> \frac{dx}{dt}=u\pm t:du\pm\frac{dp}{\rho c}=0
+> $$
+> 见前文，$\rho c$是空气阻尼，特征关系的本质仍然是等熵绝热和牛顿第三定律。
+
+#### 黎曼不变量
+
+考虑等熵绝热流动，忽略特征线$C_0$，只考虑特征线$C_\pm$，其上有特征关系$\frac{du}{dt}\pm\frac{1}{\rho c}\frac{dp}{dt}=0$，进行如下变换
+$$
+\frac{du}{dt}\pm\frac{1}{\rho c}\frac{dp}{dt}=0\\
+{du}\pm\frac{1}{\rho c}{dp}=0\\
+\Rightarrow \int({du}\pm\frac{1}{\rho c}{dp})=Const\\
+\Rightarrow u \pm \int(\frac{1}{\rho c}{dp})=Const\\
+\Rightarrow^{dp=c^2d\rho} 
+\Rightarrow u \pm \int\frac{c}{\rho}{d\rho}=Const
+$$
+称$\alpha=u + \int\frac{c}{\rho}{d\rho},\beta=u - \int\frac{c}{\rho}{d\rho}$为黎曼不变量，黎曼不变量在特征线上为以常量，其实就是特征关系。
+
+对于$(x,t)$相空间上的每一点，其必然是两条异族特征线的交点。在给定介质与其状态方程的情况下，黎曼不变量可以通过积分解出，从而求出流场中各个物理量的分布，即通过联立两个黎曼不变量并求解来求得$p,\rho,c,s$等物理量。
 
 ## 间断
 
@@ -149,3 +243,9 @@ $$
 
 ## 黎曼问题的迭代法
 
+## 参考文献
+
+- 数学物理方法——顾樵
+- 一维不定常流体动力学教程——卢芳云
+- 一维非定常流体力学——周毓麟
+- 一维流体力学差分方法——水鸿寿
