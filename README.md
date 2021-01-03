@@ -285,13 +285,91 @@ $$
 
 ### 简单波
 
+> 首先考虑问题：用特征线法求解绝热流动问题。
+>
+> 解析解：
+>
+> 理想气体情况，状态方程形式为$p=(\gamma-1)\rho e$，或$e=\frac{pv}{\gamma -1},\gamma>1$。
+>
+> 利用热力学关系式$Tds=de+pdv=\frac{1}{\gamma-1}(vdp+\gamma pdv)$，在等熵线情况下，压力和密度$\rho=\frac1v$的函数关系满足
+> $$
+> vdp+\gamma pdv=0\\
+> \frac{dp}{p}+\frac{\gamma dv}{v}=0
+> $$
+> 积分后，有$p=Av^{-\gamma}=A\rho^{\gamma}$，其中$A(s)=Be^{\frac{S-S_0}{c_V}},B$为积分常数。
+>
+> 此时声速满足$c^2=\gamma A\rho^{\gamma-1}=\frac{\gamma p}{\rho}=\gamma pv=\gamma(\gamma-1)e$。对两端同时求导有
+> $$
+> 2cdc=\gamma pdv+\gamma vdp=(\gamma-1)vdp\\
+> \Rightarrow \frac{dp}{\rho c}=\frac{2}{\gamma-1}dc
+> $$
+> 进而有关于黎曼不变量
+> $$
+> \alpha=u+l(p)=u+\int\frac{dp}{\rho c}=u+\frac{2}{\gamma-1}c\\
+> \beta=u-l(p)=u-\int\frac{dp}{\rho c}=u-\frac{2}{\gamma-1}c
+> $$
+> 将黎曼不变量进行简单的变换得到
+> $$
+> u=\frac{\alpha+\beta}2\\
+> c=\frac{\gamma-1}{4}(\alpha-\beta)
+> $$
+> 那么，对于多方气体，沿着特征线$C_+$，有$\frac{dx}{dt}=u+c=\frac{\alpha+\beta}{2}+\frac{\gamma-1}{4}(\alpha-\beta)$；沿着$C_-$特征线，有$\frac{dx}{dt}=u-c=\frac{\alpha+\beta}{2}-\frac{\gamma-1}{4}(\alpha-\beta)$。且$C_+$上$\alpha=Const,\beta\neq Const$，$C_-$反之。
+>
+> 将$u,c$和两条特征线联立就可以得到$u(x,t)$和$c(x,t)$，但是当特征线非直线时无法得到形式简单的解析解。
+>
+> 数值解：
+>
+> 借用解析解中最后的特征线表达式，有
+> $$
+> C_+:x-x_k=[\frac{\alpha_k + \beta_k}{2}+\frac{\gamma-1}{4}(\alpha_k - \beta_k)](t-t_k)\\
+> C_-:x-x_{k+1}=[\frac{\alpha_{k+1}+\beta_{k+1}}{2}-\frac{\gamma-1}{4}(\alpha_{k+1}-\beta_{k+1})](t-t_{k+1})
+> $$
+> 且在$P$点处$u=\frac{\alpha_k+\beta_{k+1}}{2},c=\frac{\gamma-1}{4}(\alpha_k-\beta_{k+1})$。
+>
+> 对于这类可约双曲型方程组，写出关系式$x(c,u),t(c,u)$比得到结果$u(x,t),c(x,t)$更加容易。因此对于这样的方程组，常常适用反函数求解的方法，即先在$(u,c)$平面上解得$x,t$，再反解出结果$u,c$。详细见等熵流动通解部分。
 
+考虑理想气体状态方程$p=(\gamma -1)\rho e,\gamma>1$，黎曼不变量表示为
+$$
+\alpha=u+l(p)=u+\int\frac{dp}{\rho c}=u+\frac{2}{\gamma-1}c\\
+\beta=u-l(p)=u-\int\frac{dp}{\rho c}=u-\frac{2}{\gamma-1}c
+$$
+将两个黎曼不变量作为判据，可以将$(x,t)$区域划分为几个区域：
+
+#### 常数状态区
+
+在此区域内，两个黎曼不变量均保持不变，即$\alpha\equiv \alpha_0,\beta\equiv\beta_0$。
+
+此时包括$u,c$在内的所有物理量都是常数。
+
+#### 简单波区
+
+在此区域内，有且只有一个黎曼不变量保持常数。
+
+1. $\alpha\equiv\alpha_0$
+2. $\beta\equiv\beta_0$
+
+与常数区相邻的区域一定是简单波区。
+
+#### 中心稀疏波区
+
+这是特殊的简单波区，在这个区域中有一族特征线时一族中心直线族，该族特征线都是从同一点发出的射线。中心稀疏波包括向左稀疏波和向右稀疏波。
+
+1. 向左中心稀疏波
+2. 向右中心稀疏波
 
 ### 间断问题
 
 ### 黎曼问题
 
 ## 黎曼问题的迭代法
+
+
+
+
+
+## 双曲型守恒律组
+
+
 
 ## 参考文献
 
