@@ -283,9 +283,75 @@ $$
 
 ## 间断
 
+### 可约双曲型方程组
+
+考虑关于两个因变量$u,v$和两个自变量$x,y$的一阶双曲型方程组
+$$
+L_1=A_1\frac{\partial u}{\partial x}+B_1\frac{\partial u}{\partial y}+C_1\frac{\partial v}{\partial x}+D_1\frac{\partial v}{\partial y}+E_1=0\\
+L_1=A_2\frac{\partial u}{\partial x}+B_2\frac{\partial u}{\partial y}+C_2\frac{\partial v}{\partial x}+D_2\frac{\partial v}{\partial y}+E_2=0
+$$
+其中的系数都是$(u,v,x,y)$的函数。当$E_1=E_2=0$，方程组就是一阶双曲型齐次方程组，在此基础上当系数$A,B,C,D$都只是依赖于$(u,v)$时，这个方程组就称为可约方程组。
+
+当雅各比矩阵的行列式
+$$
+||J||=||\frac{\partial(u,v)}{\partial(x,y)}||=
+\left|\begin{array}{rcl}
+\frac{\partial u}{\partial x} & \frac{\partial u}{\partial y}\\
+\frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}
+\end{array}\right|
+$$
+非零时，方程组就是一个线性方程组，能够通过变换实现$(u,v)$和$(x,y)$的位置对调，此时函数图像就能实现从$(u,v)$平面向$(x,y)$平面的映射。
+
+对于方程组
+$$
+A_1\frac{\partial u}{\partial x}+B_1\frac{\partial u}{\partial y}+C_1\frac{\partial v}{\partial x}+D_1\frac{\partial v}{\partial y}=0\\
+A_2\frac{\partial u}{\partial x}+B_2\frac{\partial u}{\partial y}+C_2\frac{\partial v}{\partial x}+D_2\frac{\partial v}{\partial y}=0
+$$
+有
+$$
+\left\{\begin{array}{cc}
+1=\frac{du}{du}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial u}\\
+0=\frac{dv}{du}=\frac{\partial v}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial v}{\partial y}\frac{\partial y}{\partial u}
+\end{array}\right.
+\Rightarrow
+\left\{\begin{array}{cc}
+\frac{\partial v}{\partial x}=-J\frac{\partial y}{\partial u} & \frac{\partial v}{\partial y}= J\frac{\partial x}{\partial u} \\
+\frac{\partial u}{\partial x}= J\frac{\partial y}{\partial v} & \frac{\partial u}{\partial y}= J\frac{\partial x}{\partial v}
+\end{array}\right.\\
+$$
+即
+$$
+\left|\begin{array}{rcl}
+\frac{\partial u}{\partial x} & \frac{\partial u}{\partial y}\\
+\frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}
+\end{array}\right|=
+J\left|\begin{array}{rcl}
+\frac{\partial y}{\partial v} & -\frac{\partial x}{\partial v}\\
+-\frac{\partial y}{\partial u} & \frac{\partial x}{\partial u}
+\end{array}\right|
+$$
+故而
+$$
+A_1\frac{\partial y}{\partial v}-B_1\frac{\partial x}{\partial v}-C_1\frac{\partial y}{\partial u}+D_1\frac{\partial x}{\partial u}=0\\
+A_2\frac{\partial y}{\partial v}-B_2\frac{\partial x}{\partial v}-C_2\frac{\partial y}{\partial u}+D_2\frac{\partial x}{\partial u}=0
+$$
+以上变换都是建立在雅各比行列式非零的前提上。
+
+从以上内容出发，有关于特征线与特征关系的推论：在$(x,y)$平面上，有两组特征曲线，这两组曲线是依赖于解$u(x,y),v(x,y)$的，在每一条特征线上有一个特征关系式；在$(u,v)$平面上，也有两组特征曲线，这两组曲线不依赖于$x(u,v),y(u,v)$，而且这两组曲线恰好是$(x,y)$平面上的相应特征线的特征关系。
+
+下面考虑一维的平面等熵运动方程组
+$$
+\frac{\partial\rho}{\partial t}+u\frac{\partial \rho}{\partial x}+\rho\frac{\partial u}{\partial x}=0\\
+\rho\frac{\partial u}{\partial t}+\rho u\frac{\partial u}{\partial x}+\frac{\partial p}{\partial x}=0\\
+p=f(\rho)
+$$
+记$l(\rho)=\int\frac{\sqrt{f'(\rho)}}{\rho}d\rho$。此时在$(x,t)$平面上，特征线方程为$\frac{dx}{dt}=u\pm c$，特征关系式为$u\pm l(\rho(c))=Const$；在$(u,c)$平面上，特征线方程为$u\pm l(\rho(c))=Const$与$x(u,c),y(u,c)$无关，特征关系为$\frac{dx}{dt}=u\pm c$。
+
+约定两个祥平面上的特征线的变换关系$(C_+,C_-)\rightarrow(\Gamma_+,\Gamma_-)$。
+
 ### 简单波
 
-> 首先考虑问题：用特征线法求解绝热流动问题。
+> 考虑问题：用特征线法求解绝热流动问题。
 >
 > 解析解：
 >
@@ -333,6 +399,12 @@ $$
 \alpha=u+l(p)=u+\int\frac{dp}{\rho c}=u+\frac{2}{\gamma-1}c\\
 \beta=u-l(p)=u-\int\frac{dp}{\rho c}=u-\frac{2}{\gamma-1}c
 $$
+参见特征线部分内容，解的各级微商的间断线都在特征线上，并且不同解析性质区域（如常数区域，非常数区域）的分界线也应该是特征线。
+
+在$(x,t)$区域上若是存在这样一个区域，此区域上的特征线经过变换到$(u,v)$平面上后得到新的特征线，即$(C_+,C_-)\rightarrow(\Gamma_+,\Gamma_-)$，而且有且只有一条$\Gamma_\pm$（或关系），那么这个区域就被称为是简单波区。换言之，在简单波区至少有一个特征关系（$(x,y)$平面）是常数。
+
+特征关系正是黎曼不变量的表达式！
+
 将两个黎曼不变量作为判据，可以将$(x,t)$区域划分为几个区域：
 
 #### 常数状态区
