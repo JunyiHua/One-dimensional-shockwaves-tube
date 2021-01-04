@@ -597,6 +597,13 @@ $$
 
 > Python实现一维激波管的简单迭代法：
 >
+> ```python
+> import numpy as np
+> import matplotlib.pyplot as plt
+> 
+> 
+> ```
+>
 > 
 
 ## 双曲型守恒律组
