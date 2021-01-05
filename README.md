@@ -601,6 +601,7 @@ $$
 > import numpy as np
 > import matplotlib.pyplot as plt
 > 
+> #使用Comsol中的一维激波管算例的初始条件
 > 
 > ```
 >
